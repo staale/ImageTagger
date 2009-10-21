@@ -1,6 +1,6 @@
 # Django settings for imagetagger project.
 
-from db_pass import PASSWORD
+import local_settings
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -14,7 +14,7 @@ MANAGERS = ADMINS
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'image_tag'             # Or path to database file if using sqlite3.
 DATABASE_USER = 'image_tag'             # Not used with sqlite3.
-DATABASE_PASSWORD = PASSWORD         # Not used with sqlite3.
+DATABASE_PASSWORD = local_settings.DB_PASSWORD         # Not used with sqlite3.
 DATABASE_HOST = '192.168.0.1'             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
 
