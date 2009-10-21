@@ -1,6 +1,8 @@
+import os.path
 # Django settings for imagetagger project.
 
 import local_settings
+import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -11,12 +13,16 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+ROOT_DIR = os.path.abspath(os.path.join("..", ".."))
+
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'image_tag'             # Or path to database file if using sqlite3.
 DATABASE_USER = 'image_tag'             # Not used with sqlite3.
 DATABASE_PASSWORD = local_settings.DB_PASSWORD         # Not used with sqlite3.
 DATABASE_HOST = '192.168.0.1'             # Set to empty string for localhost. Not used with sqlite3.
 DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+
+OUTPUT_FOLDER = local_settings.OUTPUT_FOLDER
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -71,6 +77,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(ROOT_DIR, "templates")
 )
 
 INSTALLED_APPS = (

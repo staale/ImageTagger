@@ -5,8 +5,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^imagetagger/', include('imagetagger.foo.urls')),
+    (r'^$', 'imagetagger.handle.views.list_unhandled'),
+    (r'^handle/', include('imagetagger.handle.urls')),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
