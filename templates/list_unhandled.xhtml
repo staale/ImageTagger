@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Latest unhandled file</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td colspan="2">{{image.path}}</td>
+            </tr>
+            <tr>
+                <td valign="top"><img id="img_thumb" src="{% url image_thumb image.id %}" /></td>
+                <td valign="top">
+                    <form action="{% url save_unhandled_image image.id%}" method="POST">
+                    <table>
+                        <tr>
+                            <td><label for="source">source</label></td>
+                            <td><input name="source" id="source"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="source_date">source_date</label></td>
+                            <td><input name="source_date" id="source_date"/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="description">description</label></td>
+                            <td><input name="description" id="description"/></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><input type="Submit" value="Save"/></td>
+                        </tr>
+                    </table>
+                    </form>
+                    <div id="zoomBox" style="background-position: 0% 0%;width:300px; height:300px; background-image:url({% url image_full image.id %})">
+                        &nbsp;
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <script language="javaScript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>
+        <script language="javaScript">
+            document.observe("dom:loaded", function() {
+                $("img_thumb").observe("mousemove",function(e) {
+                    offset = $("img_thumb").viewportOffset();
+                    var xpos = Math.max(e.clientX-offset[0]-20, 0)
+                    var ypos = Math.max(e.clientY-offset[1]-20, 0)
+                    var xoff = 100*(xpos)/$("img_thumb").getWidth();
+                    var yoff = 100*(ypos)/$("img_thumb").getHeight();
+                    $("zoomBox").style.backgroundPosition = xoff+"% "+yoff+"%";
+                });
+                $("source").focus();
+            });
+        </script>
+    </body>
+</html>
