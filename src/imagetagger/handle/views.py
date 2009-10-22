@@ -40,7 +40,7 @@ def save_unhandled_image(request, image_id):
 
 def thumb(request, image_id):
     image = get_object_or_404(ImageFile, pk=int(image_id))
-    image = Image.open(os.path.join(settings.OUTPUT_FOLDER, image.path))
+    image = Image.open(os.path.join(settings.OUTPUT_FOLDER, image.path.encode("utf-8")))
     image.thumbnail((800,800))
 
     resp = HttpResponse(mimetype="image/jpeg")
@@ -49,8 +49,8 @@ def thumb(request, image_id):
 
 def icon(request, image_id):
     image = get_object_or_404(ImageFile, pk=int(image_id))
-    image = Image.open(os.path.join(settings.OUTPUT_FOLDER, image.path))
-    image.thumbnail((64,64))
+    image = Image.open(os.path.join(settings.OUTPUT_FOLDER, image.path.encode("utf-8")))
+    image.thumbnail((100,128))
 
     resp = HttpResponse(mimetype="image/jpeg")
     image.save(resp, format="jpeg")
@@ -58,7 +58,7 @@ def icon(request, image_id):
 
 def full(request, image_id):
     image = get_object_or_404(ImageFile, pk=int(image_id))
-    image = Image.open(os.path.join(settings.OUTPUT_FOLDER, image.path))
+    image = Image.open(os.path.join(settings.OUTPUT_FOLDER, image.path.encode("utf-8")))
 
     resp = HttpResponse(mimetype="image/jpeg")
     image.save(resp, format="jpeg")

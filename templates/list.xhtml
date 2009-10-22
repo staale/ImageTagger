@@ -6,25 +6,28 @@
         <title>Latest unhandled file</title>
     </head>
     <body>
-        <table>
-            <tr>
-                <td></td>
-                <th>Source</th>
-                <th>Date</th>
-                <th>Description</th>
-                <th>Original</th>
-            </tr>
-            {% for image in images %}
-            <tr>
-                <td><a href="{% url image_thumb image.original.id %}">
-                    <img border="0" src="{% url image_icon image.original.id %}" />
-                </a></td>
-                <td valign="top">{{image.source}}</td>
-                <td valign="top">{{image.source_date}}</td>
-                <td valign="top">{{image.description}}</td>
-                <td valign="top"><a href="{% url image_full image.original.id %}">View</a></td>
-            </tr>
-            {% endfor %}
-       </table>
+        {% for image in images %}
+        <div style="width: 450px; height: 138; float:left; border: 1px black outset;margin: 2px">
+            <table>
+                <col width="100" />
+                <col width="100%" />
+                <col />
+                <tr>
+                    <td style="heigh: 128px;" rowspan="3" valign="top"><a href="{% url image_thumb image.original.id %}">
+                         <img border="0" src="{% url image_icon image.original.id %}" />
+                    </a></td>
+                    <td valign="top">{{image.source}}</td>
+                    <td valign="top" align="right">{{image.source_date}}</td>
+                </tr>
+                <tr>
+                    <td valign="top" colspan="2">{{image.description}}</td>
+                </tr>
+                <tr>
+                    <td valign="top" colspan="2"><a href="{% url image_full image.original.id %}">{{image.original.path}}</a></td>
+                </tr>
+           </table>
+        </div>
+        {% endfor %}
+        <div style="clear:both"></div>
     </body>
 </html>
