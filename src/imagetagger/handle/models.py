@@ -1,14 +1,12 @@
 from django.db import models
+import datetime
 
 class ImageFile(models.Model):
     path = models.CharField(max_length=150)
-    scanned_image = models.ForeignKey("ScannedImage", null=True)
+    scan_date = models.DateTimeField(default=datetime.datetime.now)
 
     def __unicode__(self):
-        if self.scanned_image:
-            return "%s: %s"%(self.scanned_image.source, self.path)
-        else:
-            return "*Unhandled*: %s"%(self.path)
+        return self.path
 
 class ScannedImage(models.Model):
     original = models.OneToOneField(ImageFile)
