@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Latest unhandled file</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td></td>
+                <th>Source</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Original</th>
+            </tr>
+            {% for image in images %}
+            <tr>
+                <td><a href="{% url image_thumb image.original.id %}">
+                    <img border="0" src="{% url image_icon image.original.id %}" />
+                </a></td>
+                <td valign="top">{{image.source}}</td>
+                <td valign="top">{{image.source_date}}</td>
+                <td valign="top">{{image.description}}</td>
+                <td valign="top"><a href="{% url image_full image.original.id %}">View</a></td>
+            </tr>
+            {% endfor %}
+       </table>
+    </body>
+</html>

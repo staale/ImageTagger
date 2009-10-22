@@ -13,7 +13,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-ROOT_DIR = os.path.abspath(os.path.join("..", ".."))
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 DATABASE_NAME = 'image_tag'             # Or path to database file if using sqlite3.

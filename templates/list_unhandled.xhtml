@@ -6,6 +6,7 @@
         <title>Latest unhandled file</title>
     </head>
     <body>
+        {% if image %}
         <table>
             <tr>
                 <td colspan="2">{{image.path}}</td>
@@ -38,6 +39,9 @@
                 </td>
             </tr>
         </table>
+        {% else %}
+            <b>No unhandled images left.</b>
+        {% endif %}
         <script language="javaScript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.1.0/prototype.js"></script>
         <script language="javaScript">
             document.observe("dom:loaded", function() {

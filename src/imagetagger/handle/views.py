@@ -12,12 +12,19 @@ import Image
 import os
 
 def list_unhandled(request):
+    images = ImageFile.objects.filter(scanned_image=None).order_by("-path")[:1]
     ctx = {
-        "image": ImageFile.objects.filter(scanned_image=None).order_by("-path")[0]
+        "image": len(images) > 0 and images[0] or None
     }
     return render_to_response('list_unhandled.xhtml',
                               ctx,
                               context_instance=RequestContext(request))
+
+def list_all(request):
+    ctx = {
+        "images": ScannedImage.objects.all().order_by("-source_date")
+    }
+    return render_to_response('list.xhtml', ctx, context_instance=RequestContext(request))
 
 def save_unhandled_image(request, image_id):
     image = get_object_or_404(ImageFile, pk=int(image_id))
@@ -35,6 +42,15 @@ def thumb(request, image_id):
     image = get_object_or_404(ImageFile, pk=int(image_id))
     image = Image.open(os.path.join(settings.OUTPUT_FOLDER, image.path))
     image.thumbnail((800,800))
+
+    resp = HttpResponse(mimetype="image/jpeg")
+    image.save(resp, format="jpeg")
+    return resp
+
+def icon(request, image_id):
+    image = get_object_or_404(ImageFile, pk=int(image_id))
+    image = Image.open(os.path.join(settings.OUTPUT_FOLDER, image.path))
+    image.thumbnail((64,64))
 
     resp = HttpResponse(mimetype="image/jpeg")
     image.save(resp, format="jpeg")
